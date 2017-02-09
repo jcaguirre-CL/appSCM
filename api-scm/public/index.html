@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Registro de eventos</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/addstyle.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <link href="bootstrap/css/dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<!-- INICIO -->
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bitacora de eventos Sala de control Master Canal 13</a>
+        </div>
+        <!-- <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div> -->
+      </div>
+    </nav>
+<!-- fin barra superior -->
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active"><a href="#">Registrar<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Informes</a></li>
+      </ul>
+        <!-- <li><a href="#">Analytics</a></li>
+        <li><a href="#">Export</a></li> -->
+      <!-- <ul class="nav nav-sidebar">
+        <li><a href="">Nav item</a></li>
+        <li><a href="">Nav item again</a></li>
+        <li><a href="">One more nav</a></li>
+        <li><a href="">Another nav item</a></li>
+        <li><a href="">More navigation</a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li><a href="">Nav item again</a></li>
+        <li><a href="">One more nav</a></li>
+        <li><a href="">Another nav item</a></li>
+      </ul> -->
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
+<!-- inicio formulario -->
+    <div class="container-fluid" style="border: 1px solid #c0c0c0; background-color: #fff">
+      <form clas="form-horizontal" role="form" style="float: left">
+        <!-- <h2>Frmulario de ingreso</h2> -->
+
+        <div class="form-group">
+          <label for="titulo" class="col-sm-3 control-label" style="white-space:nowrap; display: inline-block">Titulo: </label>
+          <div class="col-sm-9">
+            <input name="titulo" id="firstname" type="text" placeholder="Titulo nuevo registro" class="form-control"  autofocus ng-model="formData.textTitulo" ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes ingresar un titulo')"><br>
+            <!-- <input type="text" id="firstname" placeholder="Full name" class="form-control" autofocus style="display: inline-block; width: 40em"> -->
+            <!-- <span class="help-block">text help</span> -->
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="descripcion" class="col-sm-3 control-label">Descripcion</label>
+          <div class="col-sm-9">
+              <textarea name="descripcion" id="descripcion" placeholder="Descripcion nuevo registro" class="form-control" ng-model="formData.textDescripcion" ng-cloak></textarea><br>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="plataformaInput" class="col-sm-3 control-label">Plataforma</label>
+          <div class="col-sm-9">
+            <input type="text" name="plataformaInput" id="plataformaInput" class="form-control" placeholder="{{formData.textPlataforma}}" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar una plataforma')">
+              <select id="plata" name="plataforma" class="form-control" ng-model="textPlataforma" ng-change="selectPlataforma()" ng-cloak>
+                <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
+                <option value="" selected disabled hidden>Seleccione plataforma</option>
+                <!-- <option value="">{{textResponsable}}</option> -->
+                <option ng-repeat="plataforma in plataformas" value="{{plataforma}}" >{{plataforma}}</option>
+              </select><br>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="responsableInput" class="col-sm-3 control-label">Responsable</label>
+          <div class="col-sm-9">
+            <input type="text" name="responsableInput" id="responsableInput" placeholder="{{formData.textResponsable}}" class="form-control" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar un responsable')">
+              <select id="resp" name="respon" class="form-control" ng-model="textResponsable" ng-change="selectResponsable()" ng-cloak>
+                <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
+                <option value="" selected disabled hidden>Seleccione responsable</option>
+                <!-- <option value="">{{textResponsable}}</option> -->
+                <option ng-repeat="responsable in responsables" value="{{responsable}}" >{{responsable}}</option>
+              </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="selFinalizado" class="col-sm-3 control-label">Finalizado</label>
+          <div class="col-sm-9">
+            <input id="final1" type="radio" name="selFinalizado" ng-click="setFinalizado('true')">SI<br>
+            <input id="final2" type="radio" name="selFinalizado" ng-click="setFinalizado('false')">NO<br>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-9">
+            <button type="submit" ng-click="crearRegistro()">Agregar</button>
+            <button type="submit"  ng-click="actualizaBitacora(registroID)">Actualizar</button>
+            <button type="submit"  ng-click="deleteBitacora(registroID)">Borrar</button>
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="email" class="col-sm-3 control-label">Enviar Detalle</label>
+          <div class="col-sm-9">
+            <input type="email" id="email" placeholder="email" class="form-control">
+          </div>
+        </div> -->
+
+        <!-- <div class="form-group">
+          <label for="Date" class="col-sm-3 control-label">Fecha</label>
+          <div class="col-sm-9">
+            <input type="date" id="Date" class="form-control">
+          </div>
+        </div>-->
+
+      </form>
+    </div>
+<!-- fin formulario -->
+
+<!-- placeholders -->
+
+          <h2 class="sub-header">Listado de eventos</h2>
+
+
+          <div class="actions">
+
+            <div  style="white-space:nowrap">
+              <label for="tituloFiltro" style="display: inline-block">Titulo:</label>
+              <input type="text" name="tituloFiltro" ng-model="filterText" class="form-control" placeholder="Buscar por titulo..." style="display: inline-block; width: 20em">
+                <button type="button" ng-click="aplicarFiltro2()" style="display: inline-block">Aplicar
+                  <span class="fa fa-check-square-o" style="display: inline-block; font-size:24px;"></span>
+                </button>
+                <button type="button" ng-click="limpiarFiltro2()" style="display: inline-block">Limpiar
+                  <span class="icon-trash-o" style="display: inline-block; font-size:24px;"></span>
+                </button>
+              </span>
+            </div>
+
+            <div style="white-space:nowrap">
+            <label for="filter" style="display: inline-block">Responsable:</label>
+            <!--http://app.fontastic.me/-->
+              <select name="filter" style="display: inline-block; width: 20em" id="filter" class="form-control" ng-model="filter" ng-options="responsable for responsable in responsables" ng-change="changeFilter()">
+                <option value="">Seleccione un responsable</option>
+              </select>
+              <button type="button" style="display: inline-block" ng-click="resetFilter()">Limpiar
+                <span class="icon-trash-o" style="display: inline-block; font-size:24px;"></span>
+              </button>
+            </div>
+            <div style="white-space:nowrap">
+            <label for="filter" style="display: inline-block">Estado:</label>
+            <!--http://app.fontastic.me/-->
+              <select name="filter3" style="display: inline-block; width: 20em" class="form-control" id="filter3" ng-model="filter3" ng-options="estado for estado in estados" ng-change="changeFilter3(filter3)">
+                <option value="">Seleccione un estado</option>
+              </select>
+              <button type="button" style="display: inline-block" ng-click="resetFilter3()">Limpiar
+                <span class="icon-trash-o" style="display: inline-block; font-size:24px;"></span>
+              </button>
+            </div>
+            <hr>
+              <div class="table-responsive">
+                <table id="tablaTareas"  class="table table-striped" cellspacing="10" width="100%" padding="0em">
+                  <thead>
+                      <tr>
+                          <th>Titulo</th>
+                          <th>Responsable</th>
+                          <th>Estado</th>
+                          <th>Fecha Creacion</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+<!-- <li id="inner" class="lista" ng-click="marcarRegistro(registro._id)" ng-repeat="registro in bitacora | filter: filter | filter: filter1">{{registro.titulo}} | {{registro.updated_at | date:'dd/MM/yyyy @ h:mma'}}</li> -->
+
+                    <tr ng-repeat="registro in bitacora | filter: filter | filter: filter1 | filter: filter3" ng-click="marcarRegistro(registro._id)" ng-cloak>
+                      <td>{{registro.titulo}}</td>
+                      <td>{{registro.responsable}}</td>
+                      <!-- <td ng-model="registro.completada" ng-if="true">Completada</td>
+                      <td ng-model="registro.completada" ng-if="false">Pendiente</td> -->
+                      <td ng-show="verificarCompletada(registro.completada)">Completada</td>
+                      <td ng-show="!verificarCompletada(registro.completada)">Pendiente</td>
+                      <td>{{registro.created_at | date:'dd/MM/yyyy @ h:mma'}}</td>
+                    </tr>
+
+
+                  </tbody>
+                </table>
+              </div>
+
+          </div>
+        <!-- fin placeholders -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <!-- <script src="../../assets/js/vendor/holder.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+  </body>
+</html>

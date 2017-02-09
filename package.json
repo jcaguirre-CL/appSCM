@@ -1,0 +1,26 @@
+{
+  "name": "appscm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.18.6",
+    "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "mongoose": "^4.7.7"
+  },
+  "devDependencies": {
+  "gulp": "latest",
+  "gulp-util": "latest",
+  "gulp-sass": "latest",
+  "gulp-coffee": "latest",
+  "gulp-uglify": "latest",
+  "gulp-concat": "latest",
+  "gulp-connect": "latest"   //estas las ingrese manual y luego instale con npm install en la raiz del proyecyo
+}
+}
