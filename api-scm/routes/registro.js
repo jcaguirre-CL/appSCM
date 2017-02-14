@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Bitacora = require('../models/Registro.js');
+var Registro = require('../models/Registro.js');
 //lo busca como bitacora
 /* GET /todos listing. */
 router.get('/', function(req, res, next) {

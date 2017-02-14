@@ -7,16 +7,14 @@ angular.module('angularRegistro', [])
 .factory('ListFactory', ListFactory)
 .factory('sharedList', sharedList)
 .provider('Provider', Provider)
-.service('FormularioService', FormularioService)
-.service('ShoppingListService', ShoppingListService);
+.service('FormularioService', FormularioService);
 //.factory('Fact', Fact);
 // .factory('Fact', function(){  return { Field: 'hola' };});
 //.service('conectarApi', conectarApi);
 
-Controlador1.$inject = ['FormularioService', 'Provider', 'sharedList', 'ListFactory', 'ShoppingListService', '$rootScope'];
-function Controlador1(FormularioService, Provider, sharedList, ListFactory, ShoppingListService, $rootScope) {
+Controlador1.$inject = ['FormularioService', 'Provider', 'sharedList'];
+function Controlador1(FormularioService, Provider, sharedList) {
   var formulario = this;
-  var objShared = {};
   //var promise = sharedList.addItem(formulario.formData);
   //formulario.formData.titulo = "";
   //var lista = Provider;
@@ -50,19 +48,13 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
     formulario.formData.descripcion = formulario.descripcion;
     formulario.formData.plataforma = formulario.plataforma;
     formulario.formData.responsable = formulario.responsable;
-
-    //objShared = sharedList.addItem(formulario.formData);
-    console.log('Controlador1: ' + formulario.formData.titulo);
-    //ListFactory.setObjeto(formulario.formData);
-    // $rootScope.shared = formulario.formData;
-    FormularioService.crearRegistro(formulario.formData);
-    $rootScope.shared = ShoppingListService.addItem(formulario.formData);
-    //formulario.titulo = "";
+    sharedList.addItem(formulario.formData);
+    formulario.titulo = "";
 
     // var promise = FormularioService.recuperarRegistros();
     // promise.then(function (response) {
     //   lista = response.data;
-    console.log('Controlador1 rootScope: ' + $rootScope.shared.titulo);
+    //   console.log('Controlador1: ' + lista);
     // })
     // .catch(function (error) {
     //   console.log("Problemas al conectar con la API");
@@ -76,76 +68,13 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
 }
 
 //################################################################CONTROLLER2
-Controlador2.$inject = ['FormularioService', 'Provider', 'sharedList', '$scope', '$rootScope', 'ListFactory', 'ShoppingListService'];
-function Controlador2(FormularioService, Provider, sharedList, $scope, $rootScope, ListFactory, ShoppingListService) {
+Controlador2.$inject = ['FormularioService', 'Provider', 'sharedList', '$scope'];
+function Controlador2(FormularioService, Provider, sharedList, $scope) {
   var busqueda = this;
 
-  var objShared = {};
 
-  var scope = $rootScope;
   //var promise = Fact;
-  var promise = FormularioService.recuperarRegistros();
-  scope.shared = {};
-  busqueda.listado = [];
-//  busqueda.objShared = ListFactory.getObjeto();
- console.log(promise);
-  promise.then(function (response) {
-    busqueda.listado = response.data;
-    //   lista = response.data;
-    console.log('Controlador2: ' + busqueda.listado);
-  //   busqueda.listado = lista.data;
-    })
-    .catch(function (error) {
-      console.log("Problemas al conectar con la API");
-    });
-  //busqueda.objShared = objShared;
-//   busqueda.listado = scope.shared;
-  //busqueda.listado = FormularioService.recuperarRegistros();
-
-
-///el primer argumento debe ser un string o function
-  scope.$watch("shared.titulo", function (newValue, oldValue, scope) {
-    // busqueda.newItem = ShoppingListService.getnewItems();
-    // busqueda.listado.push(ShoppingListService.getnewItems());  no funciono
-    // busqueda.listado.push(scope.shared);
-    promise = FormularioService.recuperarRegistros();
-
-    promise.then(function (response) {
-      busqueda.listado = response.data;
-      //   lista = response.data;
-      // console.log('Controlador2: ' + busqueda.listado);
-    //   busqueda.listado = lista.data;
-      })
-      .catch(function (error) {
-        console.log("Problemas al conectar con la API");
-      });
-    console.log('objeto modificado: ' + scope.shared.titulo);
-  //   promise = FormularioService.recuperarRegistros();
-  //
-  //   //scope.listado = [];
-  // //  busqueda.objShared = ListFactory.getObjeto();
-  //  console.log(promise);
-  //   promise.then(function (response) {
-  //     busqueda.listado = response.data;
-  //     //   lista = response.data;
-  //     console.log('Controlador22: ' + busqueda.listado);
-  //     // busqueda.listado = scope.listado;
-  //   //   busqueda.listado = lista.data;
-  //     })
-  //     .catch(function (error) {
-  //       console.log("Problemas al conectar con la API");
-  //     });
-    // busqueda.listado = FormularioService.crearRegistro(busqueda.newItem);
-    //solo ocurre un avez pero funciona!!!
-      //Do anything with $scope.letters
-      //busqueda.objShared = objShared;
-      //busqueda.listado = ShoppingListService.getItems();
-
-      console.log('watch');
-      // var promise = sharedList.getList();
-
-
-  });
+//  var promise = FormularioService.recuperarRegistros();
 
   //var lista = Provider;
   //busqueda.listado = lista.data;
@@ -164,54 +93,25 @@ function Controlador2(FormularioService, Provider, sharedList, $scope, $rootScop
   //busqueda.number = ListFactory.getNumber();
   //console.log('Controlador22: ' + busqueda.number);
 
-  // $scope.$watch('busqueda.listado', function (newValue, oldValue, scope) {
-  //     //Do anything with $scope.letters
-  //     var promise = sharedList.getList();
-  //     promise.then(function (response) {
-  //       busqueda.listado = response.data;
-  //     //   lista = response.data;
-  //       console.log('Controlador2: ' + busqueda.listado);
-  //     //   busqueda.listado = lista.data;
-  //     })
-  //     .catch(function (error) {
-  //        console.log("Problemas al conectar con la API");
-  //     });
-  //
-  // });
+  $scope.$watch('busqueda.listado', function (newValue, oldValue, scope) {
+      //Do anything with $scope.letters
+      var promise = sharedList.getList();
+      promise.then(function (response) {
+        busqueda.listado = response.data;
+      //   lista = response.data;
+        console.log('Controlador2: ' + busqueda.listado);
+      //   busqueda.listado = lista.data;
+      })
+      .catch(function (error) {
+         console.log("Problemas al conectar con la API");
+      });
+
+  });
 
 
   //console.log('Controlador2: '+Fact);
 }
-////////////////////////////////////////////////
-function ShoppingListService() {
-  //***********PERMITE EXPONER EL customservice AL MUNDO EXTERIOR!!!!*****
-  var service = this;
 
-  // List of shopping items
-  var items = {};
-
-  service.addItem = function (objShared) {
-    // var item = {
-    //   titulo: objShared.titulo
-    //
-    // };
-    items = objShared;
-    console.log('Service: ' + items.titulo);
-    return items;
-  };
-
-  service.getnewItems = function () {
-    console.log('Service-getItems: ' + items.titulo)
-    return items;
-  };
-
-  // return {
-  //   addItem: service.addItem,
-  //   getItems: service.getItems
-  // };
-
-
-}
 //##########################################################################SERVICE
 // ShoppingListService.$inject = ['$q', 'WeightLossFilterService'];
 // function ShoppingListService($q, WeightLossFilterService) {
@@ -224,7 +124,6 @@ function FormularioService($http) {
         method: "GET",
         url: ("/api")
       });
-      console.log('recuperar: ' + response.length);
       return response;
     };
 
@@ -233,15 +132,14 @@ function FormularioService($http) {
     .success(function(data) {
             //console.log(data + 'holahola')
             //$scope.formData = {};
-            // $http.get('/api')
-            // .success(function(data) {
-            //         //busqueda.formData = data;
-            //         //return data;
-            //         //console.log(busqueda + 'hola')
-            // }).error(function(data) {
-            //         console.log('Error: ' + data);
-            // });
-            console.log('Insertado:' + data);
+            $http.get('/api')
+            .success(function(data) {
+                    //busqueda.formData = data;
+                    //en data esta el listado completo
+                    //console.log(busqueda + 'hola')
+            }).error(function(data) {
+                    console.log('Error: ' + data);
+            });
     }).error(function(data) {
             console.log('Error:' + data);
     });
@@ -251,7 +149,7 @@ function FormularioService($http) {
     items.splice(itemIdex, 1);
   };
 }
-//////////////////////////////////////////////////////////////////////
+
 function sharedList($http) {
   //var  = "";
 
@@ -279,27 +177,19 @@ function sharedList($http) {
     return response;
   }
 }
-///////////////////////////////////////////////////////////////////////////////
+
 function ListFactory() {
-  var objShared = {};
-
-
-  function setObjeto(newObj) {
-    objShared = newObj;
-    console.log('ListFactory: ' + objShared.titulo);
-
-    //return objShared;
+  var number = 1;
+  function getNumber() {
+    return number;
   }
-
-  function getObjeto() {
-    console.log('ListFactory-getObjeto: ' + objShared.titulo);
-    return objShared;
+  function setNumber(newNumber) {
+    number = newNumber;
   }
-
   return {
-    getObjeto: getObjeto,
-    setObjeto: setObjeto
-  };
+    getNumber: getNumber,
+    setNumber: setNumber,
+  }
   // var factory = function () {
   //   return new FormularioService();
   // };

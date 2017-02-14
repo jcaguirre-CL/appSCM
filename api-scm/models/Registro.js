@@ -4,6 +4,7 @@ var RegistroSchema = new mongoose.Schema({
   descripcion: String,
   completada: Boolean,
   responsable: String,
+  plataforma: String,
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   commited_at: { type: Date },
