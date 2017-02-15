@@ -30,12 +30,14 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
 
   formulario.selectPlataforma = function(){
     formulario.placePlataforma = formulario.plataforma;
+    formulario.valuePlataforma = formulario.plataforma;
     selectPlataforma.selectedIndex = 0;
     console.log('selec plataforma' + formulario.placePlataforma);
   };
 
   formulario.selectResponsable = function(){
     formulario.placeResponsable = formulario.responsable;
+    formulario.valueResponsable = formulario.responsable;
     selectResponsable.selectedIndex = 0;
   };
 
@@ -73,6 +75,37 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
     };
   };
 
+  formulario.modificarRegistro = function (id) {
+    formulario.formData.titulo = formulario.titulo;
+    formulario.formData.descripcion = formulario.descripcion;
+    formulario.formData.plataforma = formulario.valuePlataforma;
+    formulario.formData.responsable = formulario.valueResponsable;
+
+    promise = FormularioService.modificarRegistros(formulario.registroID, formulario.formData);
+    console.log('Actualiza: ' + promise + formulario.registroID);
+
+    promise.then(function () {
+      $rootScope.shared.titulo = "modificar";
+
+      // console.log('Controlador1 rootScope: ' + $rootScope.shared.titulo);
+      // formulario.formData = {};
+      formulario.titulo = "";
+      formulario.descripcion = "";
+      formulario.plataforma = "";
+      formulario.responsable = "";
+      formulario.placeResponsable = "";
+      formulario.placePlataforma = "";
+      formulario.valueResponsable = "";
+      formulario.valuePlataforma = "";
+      selectPlataforma.selectedIndex = 0;
+      selectResponsable.selectedIndex = 0;
+      })
+      .catch(function (error) {
+        console.log("Problemas al conectar con la API");
+      });
+
+  }
+
   formulario.borrarRegistro = function (id) {
 
     promise = FormularioService.eliminarRegistros(formulario.registroID);
@@ -102,8 +135,11 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
 
     // formulario.plataforma = scope.sharedUno.plataforma;
     // formulario.responsable = scope.sharedUno.responsable;
-    formulario.placeResponsable = scope.sharedUno.plataforma;
-    formulario.placePlataforma = scope.sharedUno.responsable;
+    formulario.placeResponsable = scope.sharedUno.responsable;
+    formulario.placePlataforma = scope.sharedUno.plataforma;
+    formulario.valueResponsable = scope.sharedUno.responsable;
+    formulario.valuePlataforma = scope.sharedUno.plataforma;
+
     formulario.registroID = scope.sharedUno._id;
     console.log('id: ' + formulario.registroID);
     selectPlataforma.selectedIndex = 0;
@@ -142,7 +178,7 @@ function Controlador2(FormularioService, Provider, sharedList, $scope, $rootScop
     promiseUno = FormularioService.recuperarUno(id);
     scope.sharedUno = {};
 
-    console.log('promiseUno: '+promiseUno);
+    console.log('promiseUno: '+ promiseUno);
     promiseUno.then(function (response) {
       scope.sharedUno = response.data;
       //   lista = response.data;
@@ -227,6 +263,19 @@ function FormularioService($http) {
       data: registro
     });
     console.log('Insertado: ' + registro);
+    return response;
+  };
+
+  service.modificarRegistros = function (registroID, objeto) {
+    var response = $http({
+      method: "PUT",
+      url: ("/api/" + registroID),
+      heardes: {
+      'Content-Type': 'application/json'
+    },
+    data: objeto
+    });
+    console.log('adentro del modificarRegistros: ' + response);
     return response;
   };
 

@@ -44,7 +44,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Bitacora de eventos Sala de control Master Canal 13</a>
+          <a class="navbar-brand" href="#">Bitacora de eventos Sala Control Master Canal 13</a>
         </div>
         <!-- <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -108,7 +108,7 @@
         <div class="form-group row">
           <label for="plataformaInput" class="col-sm-3 control-label">Plataforma</label>
           <div class="col-sm-12">
-            <input type="text" name="plataformaInput" id="plataformaInput" class="form-control" placeholder="{{formulario.placePlataforma}}" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar una plataforma')">
+            <input type="text" name="plataformaInput" id="plataformaInput" class="form-control" ng-model="formulario.valuePlataforma" placeholder="{{formulario.placePlataforma}}" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar una plataforma')">
               <select id="plata" name="plataforma" class="form-control" ng-model="formulario.plataforma" ng-change="formulario.selectPlataforma()" ng-cloak>
                 <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
                 <option value="" selected disabled hidden>Seleccione plataforma</option>
@@ -121,7 +121,7 @@
         <div class="form-group row">
           <label for="responsableInput" class="col-sm-3 control-label">Responsable</label>
           <div class="col-sm-12">
-            <input type="text" name="responsableInput" id="responsableInput" placeholder="{{formulario.placeResponsable}}" class="form-control" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar un responsable')">
+            <input type="text" name="responsableInput" id="responsableInput" ng-model="formulario.valueResponsable" placeholder="{{formulario.placeResponsable}}" class="form-control" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar un responsable')">
               <select id="resp" name="responsable" class="form-control" ng-model="formulario.responsable" ng-change="formulario.selectResponsable()" ng-cloak>
                 <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
                 <option value="" selected disabled hidden>Seleccione responsable</option>
