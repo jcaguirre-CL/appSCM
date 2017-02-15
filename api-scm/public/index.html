@@ -89,15 +89,12 @@
 
 <!-- inicio formulario -->
     <div class="container-fluid" style="border: 1px solid #c0c0c0; background-color: #fff; height:700px" ng-controller='Controlador1 as formulario'>
-      <form class="contact-form" role="form" style="float: left; width:750px">
-        <!-- <h2>Frmulario de ingreso</h2> -->
+      <form name="frm1" class="contact-form" role="form" style="float: left; width:750px">
 
         <div class="form-group row">
           <label for="titulo" class="col-sm-3 control-label" style="white-space:nowrap; display: inline-block">Titulo: </label>
           <div class="col-sm-12">
-            <input name="titulo" id="firstname" type="text" placeholder="Titulo nuevo registro" class="form-control"  autofocus ng-model="formulario.titulo" ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes ingresar un titulo')"><br>
-            <!-- <input type="text" id="firstname" placeholder="Full name" class="form-control" autofocus style="display: inline-block; width: 40em"> -->
-            <!-- <span class="help-block">text help</span> -->
+            <input name="titulo" id="titulo" type="text" placeholder="Titulo nuevo registro" class="form-control"  autofocus ng-model="formulario.titulo" ng-cloak required=""  oninvalid="this.setCustomValidity('Debes ingresar un titulo')"><br>
           </div>
         </div>
 
@@ -112,7 +109,7 @@
           <label for="plataformaInput" class="col-sm-3 control-label">Plataforma</label>
           <div class="col-sm-12">
             <input type="text" name="plataformaInput" id="plataformaInput" class="form-control" placeholder="{{formulario.placePlataforma}}" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar una plataforma')">
-              <select id="plata" name="plataforma" class="form-control" ng-model="formulario.plataforma" ng-change="selectPlataforma()" ng-cloak>
+              <select id="plata" name="plataforma" class="form-control" ng-model="formulario.plataforma" ng-change="formulario.selectPlataforma()" ng-cloak>
                 <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
                 <option value="" selected disabled hidden>Seleccione plataforma</option>
                 <!-- <option value="">{{textResponsable}}</option> -->
@@ -125,7 +122,7 @@
           <label for="responsableInput" class="col-sm-3 control-label">Responsable</label>
           <div class="col-sm-12">
             <input type="text" name="responsableInput" id="responsableInput" placeholder="{{formulario.placeResponsable}}" class="form-control" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar un responsable')">
-              <select id="resp" name="responsable" class="form-control" ng-model="formulario.responsable" ng-change="selectResponsable()" ng-cloak>
+              <select id="resp" name="responsable" class="form-control" ng-model="formulario.responsable" ng-change="formulario.selectResponsable()" ng-cloak>
                 <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
                 <option value="" selected disabled hidden>Seleccione responsable</option>
                 <!-- <option value="">{{textResponsable}}</option> -->
@@ -144,9 +141,10 @@
 
         <div class="form-group row">
           <div class="col-sm-12">
+            <!-- <button type="submit" ng-disabled="frm1.$invalid" ng-click="formulario.crearRegistro()">Agregar</button> -->
             <button type="submit" ng-click="formulario.crearRegistro()">Agregar</button>
-            <button type="submit"  ng-click="actualizaBitacora(registroID)">Actualizar</button>
-            <button type="submit"  ng-click="deleteBitacora(registroID)">Borrar</button>
+            <button type="submit" ng-click="formulario.modificarRegistro(registroID)">Actualizar</button>
+            <button type="submit" ng-click="formulario.borrarRegistro(registroID)">Borrar</button>
           </div>
         </div>
       </form>
@@ -162,28 +160,28 @@
               <h2 class="sub-header">Buscar</h2>
 
               <label for="tituloFiltro" style="display: inline-block">Titulo:</label>
-              <input type="text" name="tituloFiltro" ng-model="filterText" class="form-control" placeholder="Buscar por titulo..." style="display: inline-block; width: 20em">
-                <button type="button" ng-click="aplicarFiltro2()" style="display: inline-block">Aplicar
+              <input type="text" name="tituloFiltro" ng-model="filter1" class="form-control" placeholder="Buscar por titulo..." style="display: inline-block; width: 20em">
+                <button type="button" ng-click="aplicarFiltro1()" style="display: inline-block">Aplicar
                   <span class="fa fa-check-square-o" style="display: inline-block; font-size:24px;"></span>
                 </button>
-                <button type="button" ng-click="limpiarFiltro2()" style="display: inline-block">Limpiar
+                <button type="button" ng-click="limpiarFiltro1()" style="display: inline-block">Limpiar
                   <span class="icon-trash-o" style="display: inline-block; font-size:24px;"></span>
                 </button>
               </span>
             </div>
 
             <div style="white-space:nowrap">
-            <label for="filter" style="display: inline-block">Responsable:</label>
+            <label for="filter2" style="display: inline-block">Responsable:</label>
             <!--http://app.fontastic.me/-->
-              <select name="filter" style="display: inline-block; width: 20em" id="filter" class="form-control" ng-model="filter" ng-options="responsable for responsable in responsables" ng-change="changeFilter()">
+              <select name="filter2" style="display: inline-block; width: 20em" id="filter2" class="form-control" ng-model="filter2" ng-options="responsable for responsable in responsables" ng-change="changeFilter2()">
                 <option value="">Seleccione un responsable</option>
               </select>
-              <button type="button" style="display: inline-block" ng-click="resetFilter()">Limpiar
+              <button type="button" style="display: inline-block" ng-click="resetFilter2()">Limpiar
                 <span class="icon-trash-o" style="display: inline-block; font-size:24px;"></span>
               </button>
             </div>
             <div style="white-space:nowrap">
-            <label for="filter" style="display: inline-block">Estado:</label>
+            <label for="filter3" style="display: inline-block">Estado:</label>
             <!--http://app.fontastic.me/-->
               <select name="filter3" style="display: inline-block; width: 20em" class="form-control" id="filter3" ng-model="filter3" ng-options="estado for estado in estados" ng-change="changeFilter3(filter3)">
                 <option value="">Seleccione un estado</option>
