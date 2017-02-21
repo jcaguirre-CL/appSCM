@@ -1,0 +1,269 @@
+(function () {
+'use strict';
+                                   //esta dependencia esta en chart.js
+angular.module('angularGrafico', ["ng-fusioncharts" ,"720kb.datepicker" ,"ngRoute"])
+.controller('Controlador1', Controlador1)
+.service('FormularioService', FormularioService)
+.config(function($routeProvider) {
+  $routeProvider.when('/evaluar',{
+      template: '<chart title="Line chart example" xData="lineChartXData" yData="lineChartYData" xName="Month" yName="Hit" subtitle="This is an example"></chart>',
+      controller: Controlador1
+      });
+
+  // configure html5 to get links working on jsfiddle
+  //$locationProvider.html5Mode(false);
+});
+
+Controlador1.$inject = ['FormularioService'];
+function Controlador1(FormularioService) {
+  var graficos = this;
+  var objShared = {};
+  var promise = {};
+  var selectParametroUno = document.getElementById("parametroUnoId");
+
+  graficos.placeParametroUno = "";
+
+  graficos.labels = ["uno", "dos", "tres"];
+  graficos.data = [300, 500, 100];
+  graficos.options = {};
+
+  graficos.formData = {};
+  graficos.parametros = ["Responsable","Plataforma"];
+  graficos.placePlataforma = "";
+  graficos.valueParametroUno = "Parametro";
+  graficos.CurrentDate = new Date();
+
+  graficos.selectParametroUno = function(){
+    graficos.placeParametroUno = graficos.parametroUnoSelect;
+    graficos.valueParametroUno = graficos.parametroUnoSelect;
+    selectParametroUno.selectedIndex = 0;
+    console.log('selec parametroUnoSelect' + graficos.valueParametroUno);
+  };
+
+  var propertiesObject = {
+    type : "pie3d",
+    id : "sample-chart",
+    width : "500",//width of the chart
+    height: "400",//height of the chart
+    renderAt: "chart-container1",
+    dataFormat:"json",
+    dataSource: {
+        chart:{
+          caption:"Utilizando Constructor mediante un obj json",
+          bgColor:"EEEEEE,CCCCCC",
+          bgAlpha : "70,80",
+          bgRatio:"60, 40",
+          paletteColors: "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000",
+          use3DLighting:0,
+          borderColor: "#EEEEEE",
+          borderThickness:3,
+        },
+      data:[
+          {label:">90", value:"10"},
+          {label:"70-80", value:"30"},
+          {label:"50-70", value:"20"},
+          {label:"50", value:"10"}
+        ]
+      }
+  };
+
+  var sampleChart = new FusionCharts(propertiesObject);
+  sampleChart.render();
+  console.log(sampleChart);
+
+  FusionCharts.ready(function() {
+    var revenueChart = new FusionCharts({
+        id: 'revenue-chart',
+        type: 'pie2d',
+        renderAt: 'chart-container2',
+        dataFormat: 'json',
+        dataSource: {
+            chart:{
+              caption: "Grafico basado en: " + graficos.valueParametroUno,
+              bgColor:"EEEEEE,CCCCCC",
+              bgAlpha : "70,80",
+              bgRatio:"60, 40",
+              paletteColors: "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000",
+              use3DLighting:0,
+              borderColor: "#EEEEEE",
+              borderThickness:3,
+            },
+            data: [
+                {
+                    "label": "Jan",
+                    "value": "420000"
+                },
+                {
+                    "label": "Feb",
+                    "value": "810000"
+                },
+              ]
+          }
+
+        });
+        revenueChart.render();
+        revenueChart = getChartFromId('revenue-chart');
+      });
+
+  graficos.myDataSource = {
+      chart: {
+          caption: "Monthly revenue for last year",
+          subCaption: "Harry's SuperMart",
+          xAxisName: "Month",
+          yAxisName: "Revenues (In USD)",
+          numberPrefix: "$",
+          theme: "fint",
+          numberprefix: "$",
+          showvalues: "1",
+          "exportEnabled": "1",
+          animation: "1"
+      },
+      data: [
+          {
+              "label": "Jan",
+              "value": "420000"
+          },
+          {
+              "label": "Feb",
+              "value": "810000"
+          },
+          {
+              "label": "Mar",
+              "value": "720000"
+          },
+          {
+              "label": "Apr",
+              "value": "550000"
+          },
+          {
+              "label": "May",
+              "value": "910000"
+          },
+          {
+              "label": "Jun",
+              "value": "510000"
+          },
+          {
+              "label": "Jul",
+              "value": "680000"
+          },
+          {
+              "label": "Aug",
+              "value": "620000"
+          },
+          {
+              "label": "Sep",
+              "value": "610000"
+          },
+          {
+              "label": "Oct",
+              "value": "490000"
+          },
+          {
+              "label": "Nov",
+              "value": "900000"
+          },
+          {
+              "label": "Dec",
+              "value": "1000"
+          }
+      ]
+  };
+
+  graficos.graph = {};
+
+  graficos.graph.data = [[1, 2, 3, 4, 5, 6, 7, 8]];
+  graficos.graph.labels = ['hoi', 'doei', 'hallo', 'hee', 'hoi', 'doei', 'hallo', 'hee'];
+  graficos .graph.options = {
+  animation: false
+};
+  // graficos.graph.series = ['Series']
+  // graficos.graph.legend = true;
+
+  // var data = {"xData": ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],"yData":[{
+  //     "name": "Tokyo",
+  //     "data": [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+  // }, {
+  //     "name": "New York",
+  //     "data": [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+  // }, {
+  //     "name": "Berlin",
+  //     "data": [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+  // }, {
+  //     "name": "London",
+  //     "data": [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+  // }]}
+  //
+  // graficos.lineChartYData=data.yData
+  // graficos.lineChartXData=data.xData
+
+  // formulario.selectPlataforma = function(){
+  //   formulario.placePlataforma = formulario.plataforma;
+  //   formulario.valuePlataforma = formulario.plataforma;
+  //   selectPlataforma.selectedIndex = 0;
+  //   console.log('selec plataforma' + formulario.placePlataforma);
+  // };
+
+}
+//##########################################################################SERVICE
+FormularioService.$inject = ['$http'];
+function FormularioService($http) {
+  var service = this;
+
+  service.recuperarRegistros = function () {
+      var response = $http({
+        method: "GET",
+        url: ("/api")
+      });
+      console.log('recuperar: ' + response.length);
+      return response;
+    };
+
+  service.recuperarUno = function (id) {
+        var response = $http({
+          method: "GET",
+          url: ("/api/" + id)
+        });
+        console.log('recuperarUno: ' + response.data);
+        return response;
+      };
+
+  service.crearRegistros = function (registro) {
+    var response = $http({
+      method: "POST",
+      url: ("/api"),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: registro
+    });
+    console.log('Insertado: ' + registro);
+    return response;
+  };
+
+  service.modificarRegistros = function (registroID, objeto) {
+    var response = $http({
+      method: "PUT",
+      url: ("/api/" + registroID),
+      heardes: {
+      'Content-Type': 'application/json'
+    },
+    data: objeto
+    });
+    console.log('adentro del modificarRegistros: ' + response);
+    return response;
+  };
+
+  service.eliminarRegistros = function(id) {
+    var response = $http({
+      method: "DELETE",
+      url: ("/api/" + id),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log('Borrado: ' + response);
+    return response;
+  };
+}
+})();

@@ -6,12 +6,18 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "angular-chart.js": "^1.1.1",
+    "angular-route": "^1.6.2",
+    "angularjs-datepicker": "^2.1.12",
     "body-parser": "~1.15.2",
     "bootstrap": "^3.3.7",
+    "chart.js": "^2.5.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "ejs": "~2.5.2",
     "express": "~4.14.0",
+    "fusioncharts": "^3.11.3-sr.1",
+    "fusionmaps": "^3.11.3-sr.1",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
   }
