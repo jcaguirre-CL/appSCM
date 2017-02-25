@@ -16,3 +16,20 @@ body {
     margin-left: 5em;
     margin-bottom: 1em;
 }
+
+h1 {
+  text-align:left;
+  color: #665;
+  text-shadow: 1px 1px 0px #FFF;
+  margin:50px 0px 50px 10px
+}
+
+.divLast
+{
+   top: 0px;
+   margin:0px;
+   padding: 0px 2px 2px 3px;
+   border-width: 2px;
+   border-bottom: 2px white solid;
+   width: 100%;
+}

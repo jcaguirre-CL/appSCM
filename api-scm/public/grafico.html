@@ -21,7 +21,6 @@
     <script type="text/javascript" src="fusioncharts-suite-xt/js/fusioncharts.js"></script>
     <script type="text/javascript" src="fusioncharts-suite-xt/js/themes/fusioncharts.theme.fint.js"></script>
     <script src="angularjs-datepicker/src/js/angular-datepicker.js"></script>
-
     <script src="node_modules/angular-route/angular-route.js"></script>
     <title>Registro de eventos</title>
   </head>
@@ -48,13 +47,14 @@
       </ul>
     </div>
     <!-- MAIN -->
+    <article class="page-article">
     <div class="col-sm-7 col-md-7 col-md-offset-2 main">
     <div class="container-fluid" style="border: 1px solid #c0c0c0; background-color: #fff; height: 100%; width: 100%" ng-controller='Controlador1 as graficos'>
       <!-- <h3><label for="frm1" class="col-sm-3 control-label">Definir parámetros</label></h3> -->
       <form name="frm1" class="contact-form col-sm-9 col-md-9" role="form" style="float: left; height: 100%; width: 100%">
 
         <div class="form-group row">
-          <label for="parametroUnoInput" class="col-sm-3 control-label">Parametro 1</label>
+          <label for="parametroUnoInput" class="col-sm-3 control-label">Parametro a evaluar: </label>
           <div class="col-sm-12">
             <input type="text" name="parametroUnoInput" id="parametroUnoInput" ng-model="graficos.parametroUnoInput" placeholder="{{graficos.placeParametroUno}}" class="form-control" readonly ng-cloak>
               <select id="parametroUnoId" name="parametroUnoSelect" class="form-control" ng-model="graficos.parametroUnoSelect" ng-change="graficos.selectParametroUno()" ng-cloak>
@@ -67,9 +67,22 @@
         </div>
 
         <div class="form-group row">
+          <label for="parametroDosInput" class="col-sm-3 control-label">Tipo de grafico: </label>
+          <div class="col-sm-12">
+            <input type="text" name="parametroDosInput" id="parametroDosInput" ng-model="graficos.parametroDosInput" placeholder="{{graficos.placeParametroDos}}" class="form-control" readonly ng-cloak>
+              <select id="parametroDosId" name="parametroDosSelect" class="form-control" ng-model="graficos.parametroDosSelect" ng-change="graficos.selectParametroDos()" ng-cloak>
+                <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
+                <option value="" selected disabled hidden>Seleccione tipo de grafico</option>
+                <!-- <option value="">{{textResponsable}}</option> -->
+                <option ng-repeat="tipoGrafico in graficos.tipoGraficos" value="{{tipoGrafico}}" >{{tipoGrafico}}</option>
+              </select><br>
+          </div>
+        </div>
+
+        <div class="form-group row">
           <label for="titulo" class="col-sm-12 control-label">Fecha Inicial: </label>
           <datepicker date-format="MMMM d, y" class="form-control">
-            <input ng-model="graficos.fechaInicial" type="text" placeholder="Seleccionar fecha" class="form-control" readonly/>
+            <input ng-model="graficos.fechaInicial" type="text" placeholder="Seleccionar fecha" class="form-control">
           </datepicker>
         </div><br>
 
@@ -80,23 +93,30 @@
           </datepicker>
         </div><br><br>
 
-
         <div class="form-group row" style="position:relative; width:100%">
           <div class="col-sm-12">
-            <button type="submit" ng-click="graficos.crearGrafico(graficos.parametroUnoSelect, graficos.fechaInicial, graficos.fechaFinal)">Generar</button>
+            <button type="submit" ng-click="graficos.crearGrafico(graficos.parametroUnoSelect, graficos.parametroDosSelect, graficos.fechaInicial, graficos.fechaFinal)">Generar</button>
           </div>
-        </div><br><hr><br>
+        </div>
 
       </form>
 
-
 <!-- GRAFICO -->
       <!-- <div fusioncharts width="600" height="400" type="column2d" dataSource="{{graficos.myDataSource}}">grafico</div> -->
-      <div id="chart-container1" align="center"></div><br><br><br>
-      <!-- <div id="chart-container2">FusionCharts will render here</div> -->
+      <hr>
+      <article class="page-article">
+        <form name="frm1" class="contact-form col-sm-9 col-md-9" role="form" style="float: left; height: 100%; width: 100%">
 
+      <div class="container-fluid">
+
+        <div id="chart-container1" align="left"></div><br><br><br>
+      <!-- <div id="chart-container2">FusionCharts will render here</div> -->
+      </div>
+    </form>
+  </article>
     <!-- fin DIV CONTROLLER -->
     </div>
+  </article>
 
     </div>
     <!-- FIN DIV MAIN -->

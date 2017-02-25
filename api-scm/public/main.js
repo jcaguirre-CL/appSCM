@@ -16,23 +16,26 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
   var objShared = {};
   var promise = {};
   var scope = $rootScope;
-  var selectPlataforma = document.getElementById("plata");
+  var selectPrograma = document.getElementById("prog");
   var selectResponsable = document.getElementById("resp");
+  var selectOperador = document.getElementById("oper");
 
   scope.sharedUno = {};
 
   formulario.formData = {};
   formulario.responsables = ["giglesias","malvear","hmeza","gerardo.pizarro","csalinas","mmendezp","jcaguirre"];
   formulario.placeResponsable = "";
-  formulario.plataformas = ["plataforma1","plataforma2"];
-  formulario.placePlataforma = "";
+  formulario.operadores = ["operador1","operador2","operador3","operador4","operador5","operador6","operador7"];
+  formulario.placeOperador = "";
+  formulario.programas = ["Teletrece AM","Teletrece Tarde","Teletrece","Teletrece Noche","Bievenidos","etc.."];
+  formulario.placeProgramas = "";
   formulario.CurrentDate = new Date();
 
-  formulario.selectPlataforma = function(){
-    formulario.placePlataforma = formulario.plataforma;
-    formulario.valuePlataforma = formulario.plataforma;
-    selectPlataforma.selectedIndex = 0;
-    console.log('selec plataforma' + formulario.placePlataforma);
+  formulario.selectPrograma = function(){
+    formulario.placePrograma = formulario.programa;
+    formulario.valuePrograma = formulario.programa;
+    selectPrograma.selectedIndex = 0;
+    console.log('selec programa' + formulario.placePrograma);
   };
 
   formulario.selectResponsable = function(){
@@ -41,14 +44,20 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
     selectResponsable.selectedIndex = 0;
   };
 
+  formulario.selectOperador = function(){
+    formulario.placeOperador = formulario.operador;
+    formulario.valueOperador = formulario.operador;
+    selectOperador.selectedIndex = 0;
+  };
+
   formulario.crearRegistro = function () {
-      if (formulario.titulo){
-        formulario.formData.titulo = formulario.titulo;
+      if (formulario.responsable){
+        formulario.formData.programa = formulario.programa;
         formulario.formData.descripcion = formulario.descripcion;
-        formulario.formData.plataforma = formulario.plataforma;
+        formulario.formData.operador = formulario.operador;
         formulario.formData.responsable = formulario.responsable;
 
-        console.log('Controlador1: ' + formulario.formData.titulo);
+        console.log('Controlador1: ' + formulario.formData.programa);
 
         promise = FormularioService.crearRegistros(formulario.formData);
         console.log(promise);
@@ -56,16 +65,21 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
         promise.then(function () {
           $rootScope.shared = ShoppingListService.addItem(formulario.formData);
 
-          console.log('Controlador1 rootScope: ' + $rootScope.shared.titulo);
+          // console.log('Controlador1 rootScope: ' + $rootScope.shared.titulo);
           // formulario.formData = {};
-          formulario.titulo = "";
           formulario.descripcion = "";
-          formulario.plataforma = "";
+          formulario.programa = "";
           formulario.responsable = "";
+          formulario.operador = "";
           formulario.placeResponsable = "";
-          formulario.placePlataforma = "";
-          selectPlataforma.selectedIndex = 0;
+          formulario.placePrograma = "";
+          formulario.placeOperador = "";
+          formulario.valueOperador = "";
+          formulario.valuePrograma = "";
+          formulario.valueResponsable = "";
+          selectPrograma.selectedIndex = 0;
           selectResponsable.selectedIndex = 0;
+          selectOperador.selectedIndex = 0;
           })
           .catch(function (error) {
             console.log("Problemas al conectar con la API");
@@ -76,29 +90,33 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
   };
 
   formulario.modificarRegistro = function (id) {
-    formulario.formData.titulo = formulario.titulo;
     formulario.formData.descripcion = formulario.descripcion;
-    formulario.formData.plataforma = formulario.valuePlataforma;
+    formulario.formData.programa = formulario.valuePrograma;
     formulario.formData.responsable = formulario.valueResponsable;
+    formulario.formData.operador = formulario.valueOperador;
+
 
     promise = FormularioService.modificarRegistros(formulario.registroID, formulario.formData);
     console.log('Actualiza: ' + promise + formulario.registroID);
 
     promise.then(function () {
-      $rootScope.shared.titulo = "modificar";
+      $rootScope.shared.descripcion = "modificar registro";
 
       // console.log('Controlador1 rootScope: ' + $rootScope.shared.titulo);
       // formulario.formData = {};
-      formulario.titulo = "";
+      formulario.operador = "";
       formulario.descripcion = "";
-      formulario.plataforma = "";
+      formulario.programa = "";
       formulario.responsable = "";
       formulario.placeResponsable = "";
-      formulario.placePlataforma = "";
+      formulario.placePrograma = "";
+      formulario.placeOperador = "";
+      formulario.valueOperador = "";
+      formulario.valuePrograma = "";
       formulario.valueResponsable = "";
-      formulario.valuePlataforma = "";
-      selectPlataforma.selectedIndex = 0;
+      selectPrograma.selectedIndex = 0;
       selectResponsable.selectedIndex = 0;
+      selectOperador.selectedIndex = 0;
       })
       .catch(function (error) {
         console.log("Problemas al conectar con la API");
@@ -111,14 +129,16 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
     promise = FormularioService.eliminarRegistros(formulario.registroID);
     promise.then(function () {
       // $rootScope.shared = ShoppingListService.addItem(formulario.formData);
-      $rootScope.shared.titulo = "borrar";
-      formulario.titulo = "";
+      $rootScope.shared.descripcion = "borrar registro";
+      formulario.operador = "";
       formulario.descripcion = "";
-      formulario.plataforma = "";
+      formulario.programa = "";
       formulario.responsable = "";
       formulario.placeResponsable = "";
-      formulario.placePlataforma = "";
-      selectPlataforma.selectedIndex = 0;
+      formulario.placePrograma = "";
+      formulario.placeOperador = "";
+      selectPrograma.selectedIndex = 0;
+      selectOperador.selectedIndex = 0;
       selectResponsable.selectedIndex = 0;
       })
       .catch(function (error) {
@@ -128,22 +148,27 @@ function Controlador1(FormularioService, Provider, sharedList, ListFactory, Shop
     // console.log('deberia eliminar: ' + scope.shared.titulo);
   };
 
-  scope.$watch("sharedUno.titulo", function (newValue, oldValue, scope) {
+  scope.$watch("sharedUno.descripcion", function (newValue, oldValue, scope) {
 
-    formulario.titulo = scope.sharedUno.titulo;
     formulario.descripcion = scope.sharedUno.descripcion;
 
     // formulario.plataforma = scope.sharedUno.plataforma;
     // formulario.responsable = scope.sharedUno.responsable;
+    // formulario.operador = scope.sharedUno.operador;
+
     formulario.placeResponsable = scope.sharedUno.responsable;
-    formulario.placePlataforma = scope.sharedUno.plataforma;
+    formulario.placePrograma = scope.sharedUno.programa;
+    formulario.placeOperador = scope.sharedUno.operador;
+
     formulario.valueResponsable = scope.sharedUno.responsable;
-    formulario.valuePlataforma = scope.sharedUno.plataforma;
+    formulario.valuePrograma = scope.sharedUno.programa;
+    formulario.valueOperador = scope.sharedUno.operador;
 
     formulario.registroID = scope.sharedUno._id;
     console.log('id: ' + formulario.registroID);
-    selectPlataforma.selectedIndex = 0;
+    selectPrograma.selectedIndex = 0;
     selectResponsable.selectedIndex = 0;
+    selectOperador.selectedIndex = 0;
 
   });
 
@@ -161,6 +186,10 @@ function Controlador2(FormularioService, Provider, sharedList, $scope, $rootScop
   scope.sharedUno = {};
   busqueda.listado = [];
   busqueda.itemUno = {};
+
+  busqueda.responsables = ["giglesias","malvear","hmeza","gerardo.pizarro","csalinas","mmendezp","jcaguirre"];
+  busqueda.operadores = ["operador1","operador2","operador3","operador4","operador5","operador6","operador7"];
+  busqueda.programas = ["Teletrece AM","Teletrece Tarde","Teletrece","Teletrece Noche","Bievenidos","etc.."];
 
 //  busqueda.objShared = ListFactory.getObjeto();
   console.log(promise);
@@ -182,7 +211,7 @@ function Controlador2(FormularioService, Provider, sharedList, $scope, $rootScop
     promiseUno.then(function (response) {
       scope.sharedUno = response.data;
       //   lista = response.data;
-      console.log('Controlador2 Uno promiseUno: ' + response.data.titulo);
+      console.log('Controlador2 Uno promiseUno: ' + response.data.descripcion);
     //   busqueda.listado = lista.data;
       })
       .catch(function (error) {
@@ -191,7 +220,7 @@ function Controlador2(FormularioService, Provider, sharedList, $scope, $rootScop
   };
 
 ///el primer argumento debe ser un string o function
-  scope.$watch("shared.titulo", function (newValue, oldValue, scope) {
+  scope.$watch("shared.descripcion", function (newValue, oldValue, scope) {
 
     promise = FormularioService.recuperarRegistros();
 
@@ -200,12 +229,12 @@ function Controlador2(FormularioService, Provider, sharedList, $scope, $rootScop
       //   lista = response.data;
       // console.log('Controlador2: ' + busqueda.listado);
     //   busqueda.listado = lista.data;
-      scope.shared.titulo = "";
+      scope.shared.descripcion = "";
       })
       .catch(function (error) {
         console.log("Problemas al conectar con la API");
       });
-    console.log('objeto modificado: ' + scope.shared.titulo);
+    console.log('objeto modificado: ' + scope.shared.descripcion);
     console.log('watch');
 
   });
@@ -218,12 +247,12 @@ function ShoppingListService() {
 
   service.addItem = function (objShared) {
     items = objShared;
-    console.log('Service: ' + items.titulo);
+    console.log('Service: ' + items.descripcion);
     return items;
   };
 
   service.getnewItems = function () {
-    console.log('Service-getItems: ' + items.titulo)
+    console.log('Service-getItems: ' + items.descripcion)
     return items;
   };
 
@@ -327,13 +356,13 @@ function ListFactory() {
 
   function setObjeto(newObj) {
     objShared = newObj;
-    console.log('ListFactory: ' + objShared.titulo);
+    console.log('ListFactory: ' + objShared.descripcion);
 
     //return objShared;
   }
 
   function getObjeto() {
-    console.log('ListFactory-getObjeto: ' + objShared.titulo);
+    console.log('ListFactory-getObjeto: ' + objShared.descripcion);
     return objShared;
   }
 
