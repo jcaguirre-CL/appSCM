@@ -86,8 +86,8 @@ function Controlador1($q, GraficoService) {
               var propertiesObjectpie3d = {
                 type : "pie3d",
                 id : "container-chart1",
-                width : "500",//width of the chart
-                height: "400",//height of the chart
+                width : "700",//width of the chart
+                height: "600",//height of the chart
                 renderAt: "chart-container1",
                 dataFormat:"json",
                 dataSource: {
@@ -138,8 +138,8 @@ function Controlador1($q, GraficoService) {
               var propertiesObjectmultiserieline2d = {
                 type : "msline",
                 id : "container-chart1",
-                width : "500",//width of the chart
-                height: "400",//height of the chart
+                width : "700",//width of the chart
+                height: "600",//height of the chart
                 renderAt: "chart-container1",
                 dataFormat:"json",
                 dataSource: {

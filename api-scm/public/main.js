@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-angular.module('angularRegistro', [])
+angular.module('angularRegistro', ["720kb.datepicker"])
 .controller('Controlador1', Controlador1)
 .controller('Controlador2', Controlador2)
 .factory('ListFactory', ListFactory)

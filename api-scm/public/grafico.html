@@ -40,85 +40,93 @@
       </div>
     </nav>
 <!-- fin barra superior -->
-    <div class="col-sm-3 col-md-2 sidebar">
+    <div class="col-sm-2 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
         <li><a href="index.html">Registrar</a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
         <li class="active"><a href="#">Informes<span class="sr-only">(current)</span></a></li>
       </ul>
     </div>
     <!-- MAIN -->
-    <article class="page-article">
-    <div class="col-sm-7 col-md-7 col-md-offset-2 main">
-    <div class="container-fluid" style="border: 1px solid #c0c0c0; background-color: #fff; height: 100%; width: 100%" ng-controller='Controlador1 as graficos'>
-      <!-- <h3><label for="frm1" class="col-sm-3 control-label">Definir parámetros</label></h3> -->
-      <form name="frm1" class="contact-form col-sm-9 col-md-9" role="form" style="float: left; height: 100%; width: 100%">
+    <!-- <article class="page-article"> -->
+    <!-- <div class="col-sm-7 col-md-7 col-md-offset-2 main"> -->
+    <div class="col-sm-10  col-md-10 col-md-offset-2 main">
 
-        <div class="form-group row">
-          <label for="parametroUnoInput" class="col-sm-3 control-label">Parametro a evaluar: </label>
-          <div class="col-sm-12">
-            <input type="text" name="parametroUnoInput" id="parametroUnoInput" ng-model="graficos.parametroUnoInput" placeholder="{{graficos.placeParametroUno}}" class="form-control" readonly ng-cloak>
-              <select id="parametroUnoId" name="parametroUnoSelect" class="form-control" ng-model="graficos.parametroUnoSelect" ng-change="graficos.selectParametroUno()" ng-cloak>
-                <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
-                <option value="" selected disabled hidden>Seleccione parametro</option>
-                <!-- <option value="">{{textResponsable}}</option> -->
-                <option ng-repeat="parametro in graficos.parametros" value="{{parametro}}" >{{parametro}}</option>
-              </select><br>
+        <div class="container-fluid row" style="border: 1px solid #c0c0c0; background-color: #fff; height: 100%; width: 100%" ng-controller='Controlador1 as graficos'>
+          <div class=contact-form style="margin:50px 0px 30px 10px">
+            <h1>Generador de graficos</h1>
+            <time id="fechaevento"></time>
           </div>
-        </div>
+          <div class="contact-form">
+             <!-- Form -->
+             <div class="col-xs-4 wow animated slideInLeft" data-wow-delay=".5s">
 
-        <div class="form-group row">
-          <label for="parametroDosInput" class="col-sm-3 control-label">Tipo de grafico: </label>
-          <div class="col-sm-12">
-            <input type="text" name="parametroDosInput" id="parametroDosInput" ng-model="graficos.parametroDosInput" placeholder="{{graficos.placeParametroDos}}" class="form-control" readonly ng-cloak>
-              <select id="parametroDosId" name="parametroDosSelect" class="form-control" ng-model="graficos.parametroDosSelect" ng-change="graficos.selectParametroDos()" ng-cloak>
-                <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
-                <option value="" selected disabled hidden>Seleccione tipo de grafico</option>
-                <!-- <option value="">{{textResponsable}}</option> -->
-                <option ng-repeat="tipoGrafico in graficos.tipoGraficos" value="{{tipoGrafico}}" >{{tipoGrafico}}</option>
-              </select><br>
-          </div>
-        </div>
+               <form id="contact-us">
+                 <!-- Left Inputs -->
 
-        <div class="form-group row">
-          <label for="titulo" class="col-sm-12 control-label">Fecha Inicial: </label>
-          <datepicker date-format="MMMM d, y" class="form-control">
-            <input ng-model="graficos.fechaInicial" type="text" placeholder="Seleccionar fecha" class="form-control">
-          </datepicker>
-        </div><br>
+                     <div class="form-group" style="height:9em">
+                      <label for="parametroUnoInput" class="control-label">Parametro a evaluar: </label>
+                      <div>
+                        <input type="text" name="parametroUnoInput" id="parametroUnoInput" ng-model="graficos.parametroUnoInput" placeholder="{{graficos.placeParametroUno}}" class="form-control" readonly ng-cloak>
+                          <select id="parametroUnoId" name="parametroUnoSelect" class="form-control" ng-model="graficos.parametroUnoSelect" ng-change="graficos.selectParametroUno()" ng-cloak>
+                            <option value="" selected disabled hidden>Seleccione parametro</option>
+                            <option ng-repeat="parametro in graficos.parametros" value="{{parametro}}" >{{parametro}}</option>
+                          </select><br>
+                      </div>
+                    </div>
 
-        <div class="form-group row">
-          <label for="titulo" class="col-sm-12 control-label">Fecha Final: </label>
-          <datepicker date-format="MMMM d, y" class="form-control">
-            <input ng-model="graficos.fechaFinal" type="text"  placeholder="Seleccionar fecha" class="form-control" readonly>
-          </datepicker>
-        </div><br><br>
+                    <div class="form-group" style="height:9em">
+                      <label for="parametroDosInput" class="control-label">Tipo de grafico: </label>
+                      <div>
+                        <input type="text" name="parametroDosInput" id="parametroDosInput" ng-model="graficos.parametroDosInput" placeholder="{{graficos.placeParametroDos}}" class="form-control" readonly ng-cloak>
+                          <select id="parametroDosId" name="parametroDosSelect" class="form-control" ng-model="graficos.parametroDosSelect" ng-change="graficos.selectParametroDos()" ng-cloak>
+                            <option value="" selected disabled hidden>Seleccione tipo de grafico</option>
+                            <option ng-repeat="tipoGrafico in graficos.tipoGraficos" value="{{tipoGrafico}}" >{{tipoGrafico}}</option>
+                          </select><br>
+                      </div>
+                    </div>
 
-        <div class="form-group row" style="position:relative; width:100%">
-          <div class="col-sm-12">
-            <button type="submit" ng-click="graficos.crearGrafico(graficos.parametroUnoSelect, graficos.parametroDosSelect, graficos.fechaInicial, graficos.fechaFinal)">Generar</button>
-          </div>
-        </div>
+                    <div class="form-group" style="height:4em">
+                      <label for="fechaInicial" class="control-label">Fecha Inicial: </label>
+                      <datepicker date-format=" d MMMM y / HH:mm:ss">
+                        <input ng-model="graficos.fechaInicial" type="text" placeholder="Seleccionar fecha" class="form-control">
+                      </datepicker>
+                    </div><br>
 
-      </form>
+                    <div class="form-group" style="height:4em">
+                      <label for="fechaFinal" class="control-label">Fecha Final: </label>
+                        <datepicker date-format=" d MMMM y / HH:mm:ss">
+                        <input ng-model="graficos.fechaFinal" type="text"  placeholder="Seleccionar fecha" class="form-control">
+                      </datepicker>
+                    </div><br><br>
 
-<!-- GRAFICO -->
-      <!-- <div fusioncharts width="600" height="400" type="column2d" dataSource="{{graficos.myDataSource}}">grafico</div> -->
-      <hr>
-      <article class="page-article">
-        <form name="frm1" class="contact-form col-sm-9 col-md-9" role="form" style="float: left; height: 100%; width: 100%">
+                    <div class="form-group" style="margin: 5em 2em 2em 0em">
+                        <button type="submit" ng-click="graficos.crearGrafico(graficos.parametroUnoSelect, graficos.parametroDosSelect, graficos.fechaInicial, graficos.fechaFinal)">Generar</button>
+                    </div>
+              </form>
 
-      <div class="container-fluid">
+            </div><!--slideINleft-->
+            <div class="col-xs-8 wow animated slideInRight" data-wow-delay=".5s">
+              <div class="form-group">
 
-        <div id="chart-container1" align="left"></div><br><br><br>
-      <!-- <div id="chart-container2">FusionCharts will render here</div> -->
-      </div>
-    </form>
-  </article>
-    <!-- fin DIV CONTROLLER -->
-    </div>
-  </article>
+    <!-- GRAFICO -->
+          <!-- <div fusioncharts width="600" height="400" type="column2d" dataSource="{{graficos.myDataSource}}">grafico</div> -->
 
-    </div>
-    <!-- FIN DIV MAIN -->
+                <!-- <article class="page-article"> -->
+                  <!-- <form name="frm1" class="contact-form" role="form" style="float: left; height: 100%; width: 100%"> -->
+                    <!-- <div class="container-fluid"> -->
+                      <div id="chart-container1" align="center"></div>
+                      <!-- <div id="chart-container2">FusionCharts will render here</div> -->
+                    <!-- </div> -->
+                  <!-- </form> -->
+                <!-- </article> -->
+              </div><!--DIV form-group-->
+            </div><!--slideINright-->
+
+        </div><!--DIV ccontact-form-->
+      </div><!-- fin DIV CONTROLLER -->
+    </div>  <!-- FIN DIV MAIN -->
+    <script src="javascripts/lahora.js"></script>
   </body>
 </html>

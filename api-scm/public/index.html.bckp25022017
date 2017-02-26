@@ -12,10 +12,20 @@
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="stylesheets/addstyle.css" rel="stylesheet">
-
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+    <!-- Custom styles for this template -->
     <link href="bootstrap/css/dashboard.css" rel="stylesheet">
     <link href="angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css" />
 
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
     <script src="angular.min.js"></script>
@@ -23,44 +33,11 @@
     <script src="main.js"></script>
     <script src="angularjs-datepicker/src/js/angular-datepicker.js"></script>
 
-    <!-- barra lateral izq -->
-    <link rel="stylesheet" href="stylesheets/demo.css">
-    <link rel="stylesheet" href="stylesheets/sidebar-collapse.css">
-
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> -->
-
     <title>Registro de eventos</title>
   </head>
 <!-- INICIO -->
   <body>
-
-    <aside class="sidebar-left-collapse" style="width:20em">
-
-  		<div class="sidebar-links">
-  			<div class="link-blue">
-  				<a href="#">
-  					<i class="fa fa-pencil fa-fw"></i>Eventos
-  				</a>
-  				<ul class="sub-links">
-  					<li><a href="#">Ingresar registro</a></li>
-            <li><a href="#">Notificar registros</a></li>
-
-  				</ul>
-  			</div>
-  			<div class="link-blue">
-  				<a href="#">
-  					<i class="fa fa-bar-chart"></i>Informes
-  				</a>
-  				<ul class="sub-links">
-  					<li><a href="#">Generar graficos</a></li>
-            <li><a href="#">Generar planillas</a></li>
-          </ul>
-  			</div>
-  		</div>
-  	</aside>
-
-    <nav class="navbar-inverse navbar-fixed-top" style="width:100%; float:center">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -69,15 +46,37 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" style="margin:0px 0px 0px 320px">Bitacora de eventos Sala Control Master Canal 13</a>
+          <a class="navbar-brand" href="#">Bitacora de eventos Sala Control Master Canal 13</a>
         </div>
+        <!-- <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div> -->
       </div>
     </nav>
-    <!-- fin barra superior -->
+<!-- fin barra superior -->
+    <div class="col-sm-2 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active"><a href="#">Registrar<span class="sr-only">(current)</span></a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li><a href="grafico.html">Informes</a></li>
+      </ul>
+    </div>
 
-
+    <!-- <div class="container-fluid"> -->
+      <!-- <div class="row"> -->
   <div class="col-sm-10  col-md-10 col-md-offset-2 main">
       <!-- este div mantiene el bloque principal -->
+
+
 <!-- inicio formulario -->
     <!-- <div class="inner contact"> -->
   <div class="container-fluid row" style="border: 1px solid #c0c0c0; background-color: #fff; height:100%; width:100%" ng-controller='Controlador1 as formulario'>
@@ -138,7 +137,7 @@
                  </div>
              </div><!-- End Left Inputs -->
              <!-- Right Inputs -->
-             <div class="col-xs-7 wow animated slideInRight" data-wow-delay=".5s" style="border-left:thin solid black; border-color:#dbdbdb">
+             <div class="col-xs-7 wow animated slideInRight" data-wow-delay=".5s">
                <div class="form-group">
                  <label for="descripcion" class="control-label">Problema Detectado:</label>
                  <div>
@@ -147,7 +146,7 @@
                </div>
                <!-- <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; margin-left: auto; margin-right: auto; border-style: inset; border-width: 1px;"> -->
 
-               <div class="form-group" style="border-bottom:thin solid black; height:5em; border-color:#dbdbdb">
+               <div class="form-group" style="border-bottom:thin solid black; height:5em">
                  <label for="selFinalizado" class="control-label">Area de falla:</label>
                  <div>
                       <input type="radio" name="x" value="x" id="x" style="  float: left; margin: 2px 0 0 2px;">
@@ -163,7 +162,7 @@
                  </div>
                </div>
                <!-- <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; margin-left: auto; margin-right: auto; border-style: inset; border-width: 1px;"> -->
-               <div class="form-group" style="border-bottom:thin solid black; height:5em; border-color:#dbdbdb">
+               <div class="form-group" style="border-bottom:thin solid black; height:5em">
                  <label for="selFinalizado" class="control-label">Tipo de falla:</label>
                  <div>
                       <input type="radio" name="x" value="x" id="x" style="  float: left; margin: 2px 0 0 2px;">
@@ -183,7 +182,7 @@
                  </div>
                </div>
                <!-- <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; margin-left: auto; margin-right: auto; border-style: inset; border-width: 1px;"> -->
-               <div class="form-group" style="border-bottom:thin solid black; height:5em; border-color:#dbdbdb">
+               <div class="form-group" style="border-bottom:thin solid black; height:5em">
                  <label for="selFinalizado" class="control-label">Señal:</label>
                  <div>
                       <input type="radio" name="x" value="x" id="x" style="  float: left; margin: 2px 0 0 2px;">
@@ -199,7 +198,7 @@
                  </div>
                </div>
                <!-- <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; margin-left: auto; margin-right: auto; border-style: inset; border-width: 1px;"> -->
-               <div class="form-group" style="border-bottom:thin solid black; height:5em; border-color:#dbdbdb">
+               <div class="form-group" style="border-bottom:thin solid black; height:5em">
                  <label for="selFinalizado" class="control-label">Servicio:</label>
                  <div>
                       <input type="radio" name="x" value="x" id="x" style="  float: left; margin: 2px 0 0 2px;">
@@ -251,11 +250,11 @@
             <div style="white-space:nowrap">
               <label for="descripcionFiltro" style="display: inline-block; margin: 0em 2.5em 0em 0em">Descripcion:</label>
               <input type="text" name="descripcionFiltro" ng-model="filter1" class="form-control" placeholder="Buscar en la descripcion..." style="display: inline-block; width: 40em">
-                <button type="button" ng-click="busqueda.aplicarFiltro1()" style="display: inline-block">
+                <button type="button" ng-click="busqueda.aplicarFiltro1()" style="display: inline-block">Aplicar
                   <span class="fa fa-check-square-o" style="display: inline-block; font-size:24px;"></span>
                 </button>
-                <button type="button" ng-click="busqueda.limpiarFiltro1()" style="display: inline-block">
-                  <span class="fa fa-trash-o" style="display: inline-block; font-size:24px;"></span>
+                <button type="button" ng-click="busqueda.limpiarFiltro1()" style="display: inline-block">Limpiar
+                  <span class="icon-trash-o" style="display: inline-block; font-size:24px;"></span>
                 </button>
               </div>
 
@@ -265,8 +264,8 @@
               <select name="filter2" style="display: inline-block; width: 40em" id="filter2" class="form-control" ng-model="filter2" ng-options="responsable for responsable in busqueda.responsables" ng-change="changeFilter2()">
                 <option value="">Seleccione un responsable</option>
               </select>
-              <button type="button" style="display: inline-block" ng-click="busqueda.resetFilter2()">
-                <span class="fa fa-trash-o" style="display: inline-block; font-size:24px;"></span>
+              <button type="button" style="display: inline-block" ng-click="busqueda.resetFilter2()">Limpiar
+                <span class="icon-trash-o" style="display: inline-block; font-size:24px;"></span>
               </button>
             </div>
             <div style="white-space:nowrap">
@@ -275,8 +274,8 @@
               <select name="filter3" style="display: inline-block; width: 40em" class="form-control" id="filter3" ng-model="filter3" ng-options="programa for programa in busqueda.programas" ng-change="changeFilter3(filter3)">
                 <option value="">Seleccione un programa</option>
               </select>
-              <button type="button" style="display: inline-block" ng-click="busqueda.resetFilter3()">
-                <span class="fa fa-trash-o" style="display: inline-block; font-size:24px;"></span>
+              <button type="button" style="display: inline-block" ng-click="busqueda.resetFilter3()">Limpiar
+                <span class="icon-trash-o" style="display: inline-block; font-size:24px;"></span>
               </button>
             </div>
             <hr>
@@ -306,7 +305,7 @@
                       <td ng-model="registro.completada" ng-if="false">Pendiente</td> -->
                       <td ng-show="verificarCompletada(registro.completada)">Completada</td>
                       <td ng-show="!verificarCompletada(registro.completada)">Pendiente</td>
-                      <td>{{registro.created_at | date:'dd/MM/yyyy / h:mma'}}</td>
+                      <td>{{registro.created_at | date:'dd/MM/yyyy @ h:mma'}}</td>
                     </tr>
 
 
@@ -318,22 +317,21 @@
 
 
     </div><!-- </div> MAIN-->
+    <!-- </div> -->
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script> -->
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <!-- <script src="../../assets/js/vendor/holder.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
   <script src="javascripts/lahora.js"></script>
-  <script>
-
-    $(function () {
-
-      var links = $('.sidebar-links > div');
-
-      links.on('click', function () {
-
-        links.removeClass('selected');
-        $(this).addClass('selected');
-
-      });
-    });
-
-  </script>
   </body>
 </html>
