@@ -191,6 +191,9 @@ function Controlador2(FormularioService, Provider, sharedList, $scope, $rootScop
   busqueda.operadores = ["operador1","operador2","operador3","operador4","operador5","operador6","operador7"];
   busqueda.programas = ["Teletrece AM","Teletrece Tarde","Teletrece","Teletrece Noche","Bievenidos","etc.."];
 
+  busqueda.filtro1 = "";
+  busqueda.filtroText1 = "";
+
 //  busqueda.objShared = ListFactory.getObjeto();
   console.log(promise);
   promise.then(function (response) {
@@ -238,6 +241,25 @@ function Controlador2(FormularioService, Provider, sharedList, $scope, $rootScop
     console.log('watch');
 
   });
+//////Filtros
+busqueda.resetFiltro1 = function() {
+  // set filter object as blank
+  busqueda.filtro1 = "";
+  busqueda.filtroText1 = "";
+};
+busqueda.resetFiltro2 = function() {
+  // set filter object as blank
+  busqueda.filtro2 = "";
+};
+busqueda.resetFiltro3 = function() {
+  // set filter object as blank
+  busqueda.filtro3 = "";
+};
+busqueda.aplicarFiltro1 = function() {
+  // set filter object as blank
+  busqueda.filtro1 = busqueda.filtroText1;
+};
+
 }
 ////////////////////////////////////////////////
 function ShoppingListService() {

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='angularGrafico'>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/addstyle.css" rel="stylesheet">
+    <link href="bootstrap/css/dashboard.css" rel="stylesheet">
+
+    <link href="angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="angular.min.js"></script>
+    <script src="graficar.js"></script>
+
+    <script type="text/javascript" src="javascripts/angular-fusioncharts.min.js"></script>
+    <script type="text/javascript" src="fusioncharts-suite-xt/js/fusioncharts.js"></script>
+    <script type="text/javascript" src="fusioncharts-suite-xt/js/themes/fusioncharts.theme.fint.js"></script>
+    <script src="angularjs-datepicker/src/js/angular-datepicker.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+
+    <!-- barra lateral izq -->
+    <link rel="stylesheet" href="stylesheets/demo.css">
+    <link rel="stylesheet" href="stylesheets/sidebar-collapse.css">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <title>Registro de eventos</title>
+  </head>
+<!-- INICIO -->
+  <body>
+    <aside class="sidebar-left-collapse" style="width:20em; margin:1.5em 0px 0px 0px">
+
+  		<div class="sidebar-links">
+  			<div class="link-blue">
+  				<a href="#">
+  					<i class=""></i>
+  				</a>
+  				<ul class="sub-links">
+  					<li><a href="index.html">Ingresar registro</a></li>
+            <li><a href="#">Notificar registros</a></li>
+
+  				</ul>
+  			</div>
+  			<div class="link-blue">
+  				<a href="#">
+  					<i class=""></i>
+  				</a>
+  				<ul class="sub-links">
+  					<li><a href="grafico.html">Generar graficos</a></li>
+            <li><a href="#">Generar planillas</a></li>
+          </ul>
+  			</div>
+        <div class="link-blue">
+          <a href="#">
+            <i class=""></i>
+          </a>
+          <ul class="sub-links">
+            <li><a href="#">Crear usuarios</a></li>
+            <li><a href="#">Modificar campos</a></li>
+          </ul>
+        </div>
+  		</div>
+  	</aside>
+
+    <nav class="navbar-inverse navbar-fixed-top" style="width:100%; float:center">
+      <div class="container-fluid">
+        <div class="navbar-header" style="width:100%">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" style="margin:0px 0px 0px 320px">Bitacora de eventos Sala Control Master Canal 13</a>
+          <img src="images/c13.png" alt="" style="width:5%;heght:5%;float:right"/>
+        </div>
+      </div>
+    </nav>
+    <!-- fin barra superior -->
+    <!-- MAIN -->
+    <!-- <article class="page-article"> -->
+    <!-- <div class="col-sm-7 col-md-7 col-md-offset-2 main"> -->
+    <div class="col-sm-10  col-md-10 col-md-offset-4 main" style="float:center">
+
+        <div class="container-fluid row" style="border: 1px solid #c0c0c0; background-color: #fff; height: 30em; width: 50%; float:center" ng-controller='Controlador3 as login'>
+
+          <div class="col-md-6 col-md-offset-3">
+              <h2>Login</h2>
+              <form name="form" ng-submit="vm.login()" role="form">
+                  <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                      <label for="username">Username</label>
+                      <input type="text" name="username" id="username" class="form-control" ng-model="vm.username" required />
+                      <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+                  </div>
+                  <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                      <label for="password">Password</label>
+                      <input type="password" name="password" id="password" class="form-control" ng-model="vm.password" required />
+                      <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                  </div>
+                  <div class="form-actions">
+                      <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
+                      <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                      <!-- <a href="#!/register" class="btn btn-link">Register</a> -->
+                      <a href="postlogin.view.html" class="btn btn-link">Register</a>
+
+                  </div>
+              </form>
+          </div>
+
+      </div><!-- fin DIV CONTROLLER -->
+    </div>  <!-- FIN DIV MAIN -->
+
+  </body>
+</html>
