@@ -16,11 +16,13 @@
         return service;
 
         function Login(username, password, callback) {
+          console.log('inside authentication');
 
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
             $timeout(function () {
                 var response;
+
                 UserService.GetByUsername(username)
                     .then(function (user) {
                         if (user !== null && user.password === password) {
@@ -64,6 +66,7 @@
             $rootScope.globals = {};
             $cookies.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic';
+            console.log('ClearCredentials');
         }
     }
 

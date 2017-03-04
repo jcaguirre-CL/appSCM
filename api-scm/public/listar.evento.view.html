@@ -1,0 +1,76 @@
+<div class="container-fluid row" style="border: 1px solid #c0c0c0; background-color: #E5E5E5; height:100%; width:100%">
+        <!-- <div class="container-fluid row" style="border: 1px solid #c0c0c0; background-color: #fff; height:100%; width:100%" ng-controller='Controlador1 as formulario'> -->
+        <h1>Busqueda de eventos</h1>
+
+          <div style="white-space:nowrap">
+            <label for="descripcionFiltro" style="display: inline-block; margin: 0em 2.5em 0em 0em">Descripcion:</label>
+            <input type="text" name="descripcionFiltro" ng-model="busqueda.filtroText1" class="form-control" placeholder="Buscar en la descripcion..." style="display: inline-block; width: 40em">
+              <button type="button" ng-click="busqueda.aplicarFiltro1()" style="display: inline-block">
+                <span class="fa fa-check-square-o" style="display: inline-block; font-size:24px;"></span>
+              </button>
+              <button type="button" ng-click="busqueda.resetFiltro1()" style="display: inline-block">
+                <span class="fa fa-trash-o" style="display: inline-block; font-size:24px;"></span>
+              </button>
+          </div>
+
+          <div style="white-space:nowrap">
+          <label for="filtro2" style="display: inline-block; margin: 0em 2em 0em 0em">Responsable:</label>
+          <!--http://app.fontastic.me/-->
+            <select name="filtro2" style="display: inline-block; width: 40em" id="filtro2" class="form-control" ng-model="busqueda.filtro2" ng-options="responsable for responsable in busqueda.responsables">
+              <option value="">Seleccione un responsable</option>
+            </select>
+            <button type="button" style="display: inline-block" ng-click="busqueda.resetFiltro2()">
+              <span class="fa fa-trash-o" style="display: inline-block; font-size:24px;"></span>
+            </button>
+          </div>
+          <div style="white-space:nowrap">
+          <label for="filtro3" style="display: inline-block; margin: 0em 3.5em 0em 0em">Programa:</label>
+          <!--http://app.fontastic.me/-->
+            <select name="filtro3" style="display: inline-block; width: 40em" class="form-control" id="filtro3" ng-model="busqueda.filtro3" ng-options="programa for programa in busqueda.programas">
+              <option value="">Seleccione un programa</option>
+            </select>
+            <button type="button" style="display: inline-block" ng-click="busqueda.resetFiltro3()">
+              <span class="fa fa-trash-o" style="display: inline-block; font-size:24px;"></span>
+            </button>
+          </div>
+          <hr>
+
+            <div class="table-responsive">
+              <table id="tablaTareas"  class="table table-striped" cellspacing="10" width="100%" padding="0em">
+                <thead>
+                    <tr>
+                        <th>Descripcion del problema</th>
+                        <th>Responsable</th>
+                        <th>Programa</th>
+                        <th>Señal</th>
+                        <th>Fecha del evento</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+<!-- <li id="inner" class="lista" ng-click="marcarRegistro(registro._id)" ng-repeat="registro in bitacora | filter: filter | filter: filter1">{{registro.titulo}} | {{registro.updated_at | date:'dd/MM/yyyy @ h:mma'}}</li> -->
+
+                  <tr ng-repeat="registro in busqueda.listado | filter: busqueda.filtro1 | filter: busqueda.filtro2 | filter: busqueda.filtro3 | orderBy:'-'" ng-click="busqueda.marcarRegistro(registro._id)" ng-cloak>
+                  <!-- <tr ng-repeat="registro in busqueda.listado" ng-click="busqueda.marcarRegistro(registro._id)" ng-cloak> -->
+
+                    <td>{{registro.descripcion}}</td>
+                    <td>{{registro.responsable}}</td>
+                    <td>{{registro.programa}}</td>
+                    <!-- <td ng-model="registro.completada" ng-if="true">Completada</td>
+                    <td ng-model="registro.completada" ng-if="false">Pendiente</td> -->
+                    <td ng-show="verificarCompletada(registro.completada)">Completada</td>
+                    <td ng-show="!verificarCompletada(registro.completada)">Pendiente</td>
+                    <td>{{registro.created_at | date:'dd/MM/yyyy / h:mma'}}</td>
+                  </tr>
+
+
+                </tbody>
+              </table>
+            </div>
+
+  </div><!-- fin busquedaCONTROLLER -->
+
+
+  <!-- </div>< </div> MAIN-->
+
+<script src="javascripts/lahora.js"></script>

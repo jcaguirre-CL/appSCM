@@ -1,0 +1,173 @@
+<!-- <div class="col-sm-10  col-md-10 col-md-offset-2 main"> -->
+    <!-- este div mantiene el bloque principal -->
+<!-- inicio formulario -->
+  <!-- <div class="inner contact"> -->
+  <div class="container-fluid row" style="border: 1px solid #c0c0c0; background-color: #fff; height:100%; width:100%">
+    <!-- <div class="container-fluid" style="border: 1px solid #c0c0c0; background-color: #fff; height:750px" ng-controller='Controlador1 as formulario'> -->
+    <div class=contact-form style="margin:50px 0px 30px 10px">
+      <h1>Descripción del evento</h1>
+      <time id="fechaevento"></time>
+    </div>
+
+    <div class="contact-form">
+       <!-- Form -->
+       <form id="contact-us">
+           <!-- Left Inputs -->
+           <div class="col-xs-5 wow animated slideInLeft" data-wow-delay=".5s">
+
+               <div class="form-group" style="height:4em">
+                 <label for="fechaEvento" class="control-label">Fecha y hora del evento: </label>
+                 <datepicker date-format="d MMMM y / HH:mm:ss">
+                   <input ng-model="formulario.fechaInicial" type="text" placeholder="Seleccionar fecha" class="form-control">
+                 </datepicker>
+               </div><br>
+
+               <div class="form-group" style="height:9em">
+                 <label for="programaInput" class="control-label">Programa:</label>
+                 <div>
+                   <input type="text" name="programaInput" id="programaInput" class="form-control" ng-model="formulario.valuePrograma" placeholder="{{formulario.placePrograma}}" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar un programa')">
+                     <select id="prog" name="programa" class="form-control" ng-model="formulario.programa" ng-change="formulario.selectPrograma()" ng-cloak>
+                       <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
+                       <option value="" selected disabled hidden>Seleccione programa</option>
+                       <!-- <option value="">{{textResponsable}}</option> -->
+                       <option ng-repeat="programa in formulario.programas" value="{{programa}}" >{{programa}}</option>
+                     </select><br>
+                 </div>
+               </div>
+               <div class="form-group" style="height:9em">
+                 <label for="responsableInput" class="control-label">Reportado por:</label>
+                 <div>
+                   <input type="text" name="responsableInput" id="responsableInput" ng-model="formulario.valueResponsable" placeholder="{{formulario.placeResponsable}}" class="form-control" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar un responsable')">
+                     <select id="resp" name="responsable" class="form-control" ng-model="formulario.responsable" ng-change="formulario.selectResponsable()" ng-cloak>
+                       <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
+                       <option value="" selected disabled hidden>Seleccione responsable</option>
+                       <!-- <option value="">{{textResponsable}}</option> -->
+                       <option ng-repeat="responsable in formulario.responsables" value="{{responsable}}" >{{responsable}}</option>
+                     </select><br>
+                 </div>
+               </div>
+               <div class="form-group" style="height:9em">
+                 <label for="operadorInput" class="control-label">Operador referencia:</label>
+                 <div>
+                   <input type="text" name="operadorInput" id="operadorInput" ng-model="formulario.valueOperador" placeholder="{{formulario.placeOperador}}" class="form-control" readonly ng-cloak ng-required="true" oninvalid="this.setCustomValidity('Debes seleccionar un operador')">
+                     <select id="oper" name="operador" class="form-control" ng-model="formulario.operador" ng-change="formulario.selectOperador()" ng-cloak>
+                       <!-- <option value="" default selected="selected">Seleccione un responsable</option> -->
+                       <option value="" selected disabled hidden>Seleccione operador</option>
+                       <!-- <option value="">{{textResponsable}}</option> -->
+                       <option ng-repeat="operador in formulario.operadores" value="{{operador}}" >{{operador}}</option>
+                     </select><br>
+                 </div>
+               </div>
+           </div><!-- End Left Inputs -->
+           <!-- Right Inputs -->
+           <div class="col-xs-7 wow animated slideInRight" data-wow-delay=".5s" style="border-left:thin solid black; border-color:#dbdbdb">
+             <div class="form-group">
+               <label for="descripcion" class="control-label">Problema Detectado:</label>
+               <div>
+                   <textarea name="descripcion" id="descripcion" rows="9" placeholder="Descripcion del problema" class="form-control" ng-model="formulario.descripcion" ng-cloak></textarea><br>
+               </div>
+             </div>
+             <!-- <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; margin-left: auto; margin-right: auto; border-style: inset; border-width: 1px;"> -->
+
+             <div class="form-group" style="border-bottom:thin solid black; height:5em; border-color:#dbdbdb">
+               <label for="selFinalizado" class="control-label">Area de falla:</label>
+               <div>
+                    <input type="radio" name="x" value="x" id="x" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="x" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Sist. de emision</label>
+                    <input type="radio" name="y" value="y" id="y" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="y" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Contenido de emision</label>
+                    <input type="radio" name="z" value="z" id="z" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="z" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">PGM en vivo</label>
+                    <input type="radio" name="w" value="w" id="w" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="w" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Equipos de la linea de TX</label><br>
+                   <!-- <input id="final1" type="radio" name="selFinalizado" ng-click="setFinalizado('true')">SI<br>
+                   <input id="final2" type="radio" name="selFinalizado" ng-click="setFinalizado('false')">NO<br><br> -->
+               </div>
+             </div>
+             <!-- <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; margin-left: auto; margin-right: auto; border-style: inset; border-width: 1px;"> -->
+             <div class="form-group" style="border-bottom:thin solid black; height:5em; border-color:#dbdbdb">
+               <label for="selFinalizado" class="control-label">Tipo de falla:</label>
+               <div>
+                    <input type="radio" name="x" value="x" id="x" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="x" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Audio</label>
+                    <input type="radio" name="y" value="y" id="y" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="y" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Video</label>
+                    <input type="radio" name="z" value="z" id="z" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="z" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Audio y Video</label>
+                    <input type="radio" name="y" value="y" id="y" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="y" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Equipo</label>
+                    <input type="radio" name="y" value="y" id="y" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="y" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Humana</label>
+                    <input type="radio" name="w" value="w" id="w" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="w" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Enlace</label><br>
+                   <!-- <input id="final1" type="radio" name="selFinalizado" ng-click="setFinalizado('true')">SI<br>
+                   <input id="final2" type="radio" name="selFinalizado" ng-click="setFinalizado('false')">NO<br><br> -->
+               </div>
+             </div>
+             <!-- <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; margin-left: auto; margin-right: auto; border-style: inset; border-width: 1px;"> -->
+             <div class="form-group" style="border-bottom:thin solid black; height:5em; border-color:#dbdbdb">
+               <label for="selFinalizado" class="control-label">Señal:</label>
+               <div>
+                    <input type="radio" name="x" value="x" id="x" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="x" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Nacional SD</label>
+                    <input type="radio" name="y" value="y" id="y" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="y" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Nacional HD</label>
+                    <input type="radio" name="z" value="z" id="z" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="z" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Cable</label>
+                    <input type="radio" name="w" value="w" id="w" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="w" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Todas</label><br>
+                   <!-- <input id="final1" type="radio" name="selFinalizado" ng-click="setFinalizado('true')">SI<br>
+                   <input id="final2" type="radio" name="selFinalizado" ng-click="setFinalizado('false')">NO<br><br> -->
+               </div>
+             </div>
+             <!-- <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; margin-left: auto; margin-right: auto; border-style: inset; border-width: 1px;"> -->
+             <div class="form-group" style="border-bottom:thin solid black; height:5em; border-color:#dbdbdb">
+               <label for="selFinalizado" class="control-label">Servicio:</label>
+               <div>
+                    <input type="radio" name="x" value="x" id="x" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="x" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Bien</label>
+                    <input type="radio" name="y" value="y" id="y" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="y" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Malo por audio</label>
+                    <input type="radio" name="z" value="z" id="z" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="z" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Malo por video</label>
+                    <input type="radio" name="w" value="w" id="w" style="  float: left; margin: 2px 0 0 2px;">
+                    <label for="w" style="  float: left;  clear: none;  display: block;  padding: 2px 1em 0 0">Malo por audio y video</label><br>
+                   <!-- <input id="final1" type="radio" name="selFinalizado" ng-click="setFinalizado('true')">SI<br>
+                   <input id="final2" type="radio" name="selFinalizado" ng-click="setFinalizado('false')">NO<br><br> -->
+               </div>
+             </div>
+             <!-- <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; margin-left: auto; margin-right: auto; border-style: inset; border-width: 1px; color: #123455"> -->
+
+             <div class="clear"></div>
+
+           <!-- Bottom Submit -->
+             <div class="form-group" style="margin: 5em 2em 2em 0em">
+                 <!-- <button type="submit" ng-disabled="frm1.$invalid" ng-click="formulario.crearRegistro()">Agregar</button> -->
+                 <button type="submit" ng-click="formulario.crearRegistro()">Agregar</button>
+                 <button type="submit" ng-click="formulario.modificarRegistro(registroID)">Actualizar</button>
+                 <button type="submit" ng-click="formulario.borrarRegistro(registroID)">Borrar</button>
+             </div>
+          </div><!-- End Right Inputs -->
+
+           <!-- Clear -->
+           <div class="clear"></div>
+       </form>
+
+       <!-- Your Mail Message -->
+       <div class="mail-message-area">
+           <!-- Message -->
+           <div class="alert gray-bg mail-message not-visible-message">
+               <!-- <strong>Thank You !</strong> Your email  has been delivered. -->
+           </div>
+       </div>
+
+   </div><!-- End Contact Form Area -->
+
+</div><!-- fin formulari  o CONTROLLER-->
+<!-- </div> -->
+<!-- busqueda -->
+
+
+  <!-- </div>< </div> MAIN-->
+
+<script src="javascripts/lahora.js"></script>
